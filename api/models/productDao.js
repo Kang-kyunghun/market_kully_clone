@@ -127,8 +127,54 @@ const getProduct = async (productId) => {
   }
 };
 
+const getCategory = async (categoryId) => {
+  try {
+    const [category] = await dataSource.query(
+      `
+      SELECT
+        c.id,
+        c.name
+      FROM categories c
+      WHERE c.id = ?
+     `,
+      [categoryId]
+    );
+
+    return category;
+  } catch {
+    const error = new Error('dataSource Error');
+    error.statusCode = 400;
+
+    throw error;
+  }
+};
+
+const getSubCategoryByCategoryId = async (categoryId) => {
+  try {
+    const subCategories = await dataSource.query(
+      `
+      SELECT
+        sc.id,
+        sc.name
+      FROM sub_categories sc
+      WHERE sc.category_id = ?
+     `,
+      [categoryId]
+    );
+
+    return subCategories;
+  } catch {
+    const error = new Error('dataSource Error');
+    error.statusCode = 400;
+
+    throw error;
+  }
+};
+
 module.exports = {
   getTotalProduct,
   getProductList,
   getProduct,
+  getCategory,
+  getSubCategoryByCategoryId,
 };

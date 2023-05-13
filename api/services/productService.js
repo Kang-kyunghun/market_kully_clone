@@ -40,7 +40,24 @@ const getProduct = async (productId) => {
   return product;
 };
 
+const getCategory = async (categoryId) => {
+  const category = await productDao.getCategory(categoryId);
+
+  if (!category) {
+    const err = new Error('CATEGORY_DOES_NOT_EXIST');
+    err.statusCode = 404;
+
+    throw err;
+  }
+
+  const subCategories = await productDao.getSubCategoryByCategoryId(categoryId);
+  category.subCategories = subCategories;
+
+  return category;
+};
+
 module.exports = {
   getProductList,
   getProduct,
+  getCategory,
 };

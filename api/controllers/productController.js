@@ -35,7 +35,15 @@ const getProduct = catchAsync(async (req, res) => {
   res.status(200).json({ product });
 });
 
+const getCategory = catchAsync(async (req, res) => {
+  const { categoryId } = req.params;
+  const category = await productService.getCategory(categoryId);
+
+  res.status(200).json({ category });
+});
+
 module.exports = {
   getProductList,
   getProduct,
+  getCategory,
 };
