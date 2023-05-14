@@ -158,6 +158,7 @@ const getSubCategoryByCategoryId = async (categoryId) => {
         sc.name
       FROM sub_categories sc
       WHERE sc.category_id = ?
+      ORDER BY sc.id 
      `,
       [categoryId]
     );
