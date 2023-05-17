@@ -9,7 +9,7 @@ const getProductList = catchAsync(async (req, res) => {
     maxPrice = '10000000',
     sortField,
     offset = '0',
-    limit = '10',
+    limit = '9',
   } = req.query;
 
   const result = await productService.getProductList(
