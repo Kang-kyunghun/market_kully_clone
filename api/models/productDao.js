@@ -108,8 +108,8 @@ const getProduct = async (productId) => {
           p.detail,
           p.price,
           p.thumbnail,
-          sc.name,
-          c.name
+          sc.subCategoryName,
+          c.categoryName
         FROM products p
         JOIN sub_categories sc ON sc.id = p.sub_category_id
         JOIN categories c ON c.id = sc.category_id
